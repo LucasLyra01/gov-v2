@@ -135,11 +135,6 @@
         onContext(ctx){
           this.selected = ctx.selectedYMD
         },
-        mostrar() {
-          return (
-            console.log('nlei')
-          )
-        }
     },
     computed: {
         ...mapState({

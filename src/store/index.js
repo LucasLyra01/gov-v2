@@ -88,7 +88,7 @@ export default new Vuex.Store({
         },
         pegarDadosAPI(context) {
 
-            console.log(context.state.dataInicio)
+            // console.log(context.state.dataInicio)
 
             context.commit("atualizarShowProgressBar", true);
 
