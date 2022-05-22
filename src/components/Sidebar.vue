@@ -3,13 +3,13 @@
     <!-- Vertical navbar -->
     <div class="vertical-nav bg-white" id="sidebar">
       <!-- <button id="sidebarCollapse" type="button" class="btn btn-light bg-white rounded-pill shadow-sm px-4 mb-4"><i class="fa fa-bars mr-2"></i><small class="text-uppercase font-weight-bold"></small></button> -->
-      <div class="py-3 px-5 mb-4 bg-light">
+      <div class="py-3 px-4 mb-4 bg-light">
         <div class="media d-flex align-items-center"><img src="../assets/logoSEG.png" alt="..." width="200" class="mr-3 img-thumbnail shadow-sm">
           <div class="media-body">
             <!-- <p class="font-weight-light text-muted mb-0">Full Stack developer</p> -->
           </div>
         </div>
-            <p class="m-3">Secretaria de Estado do Governo</p>
+            <h5 class="m-3">Secretaria de Estado do Governo</h5>
       </div>
     
       <p class="text-gray font-weight-bold text-uppercase px-5 small pb-4 mb-0">Menu</p>
@@ -17,15 +17,15 @@
       <ul class="nav flex-column bg-white mb-0">
         <li class="nav-item">
           <a href="#" class="nav-link text-dark font-italic bg-light">
-                    <i class="fa fa-th-large mr-3 text-primary fa-fw"></i>
-                    Consultar Atos Legislativos
-                </a>
+              <i class="fa fa-th-large mr-3 text-primary fa-fw"></i>
+              Consultar Atos Legislativos
+          </a>
         </li>
         <li class="nav-item">
           <a href="#" class="nav-link text-dark font-italic">
-                    <i class="fa fa-address-card mr-3 text-primary fa-fw"></i>
-                    About
-                </a>
+                  <i class="fa fa-address-card mr-3 text-primary fa-fw"></i>
+                  About
+              </a>
         </li>
         <li class="nav-item">
           <a href="#" class="nav-link text-dark font-italic">

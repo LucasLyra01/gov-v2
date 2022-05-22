@@ -1,11 +1,12 @@
 <template>
     <div>
     <!-- Page content holder -->
-      <div class="page-content p-1" id="content">
+      <!-- <div class="page-content p-1" id="content">
         <b-navbar type="dark" variant="secondary">
           <button id="sidebarCollapse" type="button" style="margin-left: 10px;" class="btn btn-light bg-white rounded-pill shadow-sm px-3"><i class="fa fa-bars mr-2"></i><small class="text-uppercase font-weight-bold"></small></button>
         </b-navbar>
-      </div>
+      </div> -->
+      <Navbar />
       <div class="page-content p-1" id="content">
         <div class="container-inputs">
           <b-container class="bv-example-row inputs1">
@@ -25,7 +26,7 @@
               <b-col>
                 <b-form-input 
                   placeholder="Tipo de Lei"
-                  v-model="tipoAtoNormativo"
+                  v-model="tipoAtoNormativo.text"
                 />
               </b-col>
             </b-row>
@@ -33,30 +34,37 @@
           <b-container class="bv-example-row inputs2 separacao-inputs">
             <b-row>
               <b-col>
-                <b-form-input 
-                  placeholder="N° Lei"
+                <b-form-datepicker
+                  placeholder="Data Inicial"
+                  locale="pt-BR"
+                  :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
                   v-model="dataInicio"
-                />
+                ></b-form-datepicker>
               </b-col>
               <b-col>
-                <b-form-input 
-                  placeholder="Ano"
+                <b-form-datepicker
+                  placeholder="Data Final"
+                  locale="pt-BR"
+                  :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
                   v-model="dataFinal"
-                />
+                ></b-form-datepicker>
               </b-col>
               <b-col>
                 <b-form-input 
-                  placeholder="Tipo de Lei"
+                  placeholder="Descrição"
                   v-model="descricao"
                 />
               </b-col>
             </b-row>
           </b-container>
-          <b-container class="bv-example-row inputs2 separacao-inputs">
+          <b-container class="bv-example-row button separacao-inputs">
             <b-row>
               <b-col>
-                <b-button  @click="pegarDadosAPI" variant="outline-primary">Button</b-button>
+                <b-button  @click="pegarDadosAPI" variant="outline-primary">Pesquisar</b-button>
               </b-col>
+              <!-- <b-col>
+                <b-button  @click="mostrar" variant="outline-primary">Mostrar campos</b-button>
+              </b-col> -->
             </b-row>
           </b-container>
         </div>
@@ -65,13 +73,12 @@
           v-for="(items, index) in listaDadosAPI"
           :key="index"
         >
-          
           <b-card no-body class="overflow-hidden card">
             <b-row no-gutters>
-              <b-col md="2" class="image-card">
+              <b-col md="1" class="image-card">
                 <b-icon icon="x-circle" variant="success"></b-icon>
               </b-col>
-              <b-col md="5">
+              <b-col md="4">
                 <b-card-body>
                   <b-card-text>
                     <div><b>N° Lei:</b> {{ items.numeroAnoAtoNormativo }}</div>
@@ -81,10 +88,18 @@
                   </b-card-text>
                 </b-card-body>
               </b-col>
-              <b-col md="5">
+              <b-col md="4">
                 <b-card-body title="Assunto">
                   <b-card-text>
                     <div>{{ items.descricao }}</div>
+                  </b-card-text>
+                </b-card-body>
+              </b-col>
+              <b-col md="3">
+                <b-card-body title="Links">
+                  <b-card-text>
+                    <div><a href="">Documento Original</a></div>
+                    <div><a href="">Documento Original</a></div>
                   </b-card-text>
                 </b-card-body>
               </b-col>
@@ -98,31 +113,49 @@
 
 <script>
   import { mapState, mapActions } from 'vuex'
+  import Navbar from '@/components/Navbar.vue';
   export default {
-    name: 'HomeView',
-    methods: {
-      ...mapActions(["atualizarLista", "atualizarShowProgressBar", "pegarDadosAPI"])
+    name: "HomeView",
+    components: {
+      Navbar
     },
-    mounted: {
-      listaDadosAPI(){
-        return this.listaDadosAPI;
+    data() {
+      return {
+        value: '',
+        selected: '',
+        nlei: "",
+        nAno: "",
+        dataInicial: "",
+        dataFinal: "",
+        descricao: "",
       }
     },
+    methods: {
+        ...mapActions(["atualizarLista", "atualizarShowProgressBar", "pegarDadosAPI"]),
+        onContext(ctx){
+          this.selected = ctx.selectedYMD
+        },
+        mostrar() {
+          return (
+            console.log('nlei')
+          )
+        }
+    },
     computed: {
-      ...mapState({
-        nlei: 'nlei',
-        nAno: 'ano',
-        dataInicio: 'dataInicio',
-        dataFinal: 'dataFinal',
-        descricao: 'descricao',
-        lista: 'lista',
-        infos: 'infos',
-        tipoAtoNormativo: 'tipoAtoNormativo',
-        showProgressBar: 'showProgressBar',
-        listaDadosAPI: 'listaDadosAPI'
-      })
-    }
-  }
+        ...mapState({
+            nlei: "nlei",
+            nAno: "ano",
+            dataInicio: "dataInicio",
+            dataFinal: "dataFinal",
+            descricao: "descricao",
+            lista: "lista",
+            infos: "infos",
+            tipoAtoNormativo: "tipoAtoNormativo",
+            showProgressBar: "showProgressBar",
+            listaDadosAPI: "listaDadosAPI"
+        }),
+    },
+}
 </script>
 
 <style lang="scss">
